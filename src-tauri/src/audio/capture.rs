@@ -123,11 +123,6 @@ impl AudioCapture {
         (samples, self.sample_rate)
     }
 
-    /// Check if currently recording
-    pub fn is_recording(&self) -> bool {
-        self.stream.is_some()
-    }
-
     /// List available input devices
     pub fn list_devices() -> Result<Vec<String>> {
         let host = cpal::default_host();

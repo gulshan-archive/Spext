@@ -98,23 +98,6 @@ pub fn detect(text: &str) -> Option<KeywordMatch> {
     None
 }
 
-/// Convert a keyword match into an AI processing task identifier
-pub fn match_to_task(keyword_match: &KeywordMatch) -> String {
-    if let Some(ref format) = keyword_match.format {
-        match format.as_str() {
-            "professional email" | "formal email" => "professional_email".to_string(),
-            "bullet points" => "bullet_points".to_string(),
-            "code comment" => "code_comment".to_string(),
-            "casual" | "casual message" | "casual email" => "casual".to_string(),
-            "formal" => "formal".to_string(),
-            "summary" => "summarize".to_string(),
-            other => other.to_string(),
-        }
-    } else {
-        keyword_match.action.clone()
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

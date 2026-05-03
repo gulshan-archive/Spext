@@ -1,6 +1,6 @@
 # Spext — Offline Speech to Text for Desktop
 
-A fully offline desktop speech-to-text application built with Tauri 2.0, React, and TypeScript. Inspired by [Spokenly](https://spokenly.app/), but with zero cloud dependency.
+A fully offline desktop speech-to-text application built with Tauri 2.0, React, and TypeScript with zero cloud dependency.
 
 ## Features
 
