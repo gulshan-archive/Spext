@@ -43,8 +43,12 @@ impl Default for RecordingPhase {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum WhisperModel {
+    TinyQ5,
+    TinyEnQ5,
     Tiny,
     TinyEn,
+    BaseQ5,
+    BaseEnQ5,
     Base,
     BaseEn,
     Small,
@@ -57,7 +61,7 @@ pub enum WhisperModel {
 
 impl Default for WhisperModel {
     fn default() -> Self {
-        Self::Base
+        Self::TinyEnQ5
     }
 }
 
@@ -65,8 +69,12 @@ impl WhisperModel {
     /// HuggingFace download URL for the GGML model file
     pub fn download_url(&self) -> &str {
         match self {
+            Self::TinyQ5 => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny-q5_1.bin",
+            Self::TinyEnQ5 => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en-q5_1.bin",
             Self::Tiny => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin",
             Self::TinyEn => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin",
+            Self::BaseQ5 => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base-q5_1.bin",
+            Self::BaseEnQ5 => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en-q5_1.bin",
             Self::Base => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin",
             Self::BaseEn => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin",
             Self::Small => "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin",
@@ -81,8 +89,12 @@ impl WhisperModel {
     /// Filename for the model on disk
     pub fn filename(&self) -> &str {
         match self {
+            Self::TinyQ5 => "ggml-tiny-q5_1.bin",
+            Self::TinyEnQ5 => "ggml-tiny.en-q5_1.bin",
             Self::Tiny => "ggml-tiny.bin",
             Self::TinyEn => "ggml-tiny.en.bin",
+            Self::BaseQ5 => "ggml-base-q5_1.bin",
+            Self::BaseEnQ5 => "ggml-base.en-q5_1.bin",
             Self::Base => "ggml-base.bin",
             Self::BaseEn => "ggml-base.en.bin",
             Self::Small => "ggml-small.bin",
@@ -97,8 +109,12 @@ impl WhisperModel {
     /// Human-readable display name with approximate size
     pub fn display_name(&self) -> &str {
         match self {
+            Self::TinyQ5 => "⚡ Tiny Fast (~31 MB)",
+            Self::TinyEnQ5 => "⚡ Tiny EN Fast (~31 MB)",
             Self::Tiny => "Tiny (~75 MB)",
             Self::TinyEn => "Tiny English (~75 MB)",
+            Self::BaseQ5 => "⚡ Base Fast (~57 MB)",
+            Self::BaseEnQ5 => "⚡ Base EN Fast (~57 MB)",
             Self::Base => "Base (~142 MB)",
             Self::BaseEn => "Base English (~142 MB)",
             Self::Small => "Small (~466 MB)",
@@ -113,6 +129,10 @@ impl WhisperModel {
     /// List all available models
     pub fn all() -> Vec<WhisperModel> {
         vec![
+            Self::TinyQ5,
+            Self::TinyEnQ5,
+            Self::BaseQ5,
+            Self::BaseEnQ5,
             Self::Tiny,
             Self::TinyEn,
             Self::Base,
@@ -150,7 +170,7 @@ impl Default for SpextConfig {
         Self {
             shortcut: "Alt+Space".to_string(),
             language: "en".to_string(),
-            whisper_model: WhisperModel::Base,
+            whisper_model: WhisperModel::TinyEnQ5,
             smart_keywords_enabled: false,
             copy_to_clipboard: true,
             chime_enabled: true,

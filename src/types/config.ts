@@ -1,8 +1,12 @@
 import { z } from "zod";
 
 export const WhisperModelSchema = z.enum([
+  "tiny_q5",
+  "tiny_en_q5",
   "tiny",
   "tiny_en",
+  "base_q5",
+  "base_en_q5",
   "base",
   "base_en",
   "small",
@@ -22,7 +26,7 @@ export interface WordReplacement {
 export const SpextConfigSchema = z.object({
   shortcut: z.string().default("Alt+Space"),
   language: z.string().default("en"),
-  whisper_model: WhisperModelSchema.default("base"),
+  whisper_model: WhisperModelSchema.default("tiny_en_q5"),
   smart_keywords_enabled: z.boolean().default(false),
   copy_to_clipboard: z.boolean().default(true),
   chime_enabled: z.boolean().default(true),
