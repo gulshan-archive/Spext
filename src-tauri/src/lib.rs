@@ -61,6 +61,13 @@ pub fn run() {
 
             setup_tray(app)?;
 
+            // Pre-load Whisper model in background so first recording is fast
+            let preload_config = config.clone();
+            std::thread::spawn(move || {
+                log::info!("Pre-loading Whisper model in background...");
+                let _ = transcription::whisper::preload(&preload_config.whisper_model);
+            });
+
             log::info!("Spext initialized (offline mode)");
             Ok(())
         })
